@@ -103,82 +103,6 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Column(
             children: [
-              SizedBox(height: 130),
-              Row(
-                children: [
-                  SizedBox(width: 24),
-                  Text(
-                    'What is making you worry?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 18,
-                      fontFamily: AppTheme.fontFamily,
-                      height: 1.5,
-                      color: AppTheme.black,
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 24),
-                      child: Tags(
-                        key: _tagStateKey,
-                        alignment: WrapAlignment.start,
-                        itemCount: _items.length,
-                        spacing: 8,
-                        itemBuilder: (int index) {
-                          final item = _items[index];
-                          return GestureDetector(
-                            onTap: () {
-                              _tagStateKey.currentState!.getAllItem;
-                              _selected.add(item);
-                            },
-                            child: ItemTags(
-                              key: Key(index.toString()),
-                              index: index,
-                              title: item.title,
-                              active: item.active,
-                              padding: EdgeInsets.symmetric(
-                                vertical: 8,
-                                horizontal: 12,
-                              ),
-                              activeColor: AppTheme.red,
-                              splashColor: AppTheme.purple,
-                              colorShowDuplicate: AppTheme.purple,
-                              textColor: AppTheme.red,
-                              pressEnabled: true,
-                              textActiveColor: AppTheme.white,
-                              elevation: 0,
-                              color: AppTheme.white,
-                              border: Border.all(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(12),
-                              customData: '',
-                              textStyle: TextStyle(
-                                fontSize: 14,
-                                fontFamily: AppTheme.fontFamily,
-                                fontWeight: FontWeight.normal,
-                              ),
-                              combine: ItemTagsCombine.withTextBefore,
-                              onPressed: (item) {
-                                print(item);
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 96),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Column(
-            children: [
               SizedBox(height: 16),
               Container(
                 height: 96,
@@ -261,6 +185,130 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 98),
+              Expanded(
+                child: Container(color: AppTheme.white),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  shrinkWrap: true,
+                  // physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    Stack(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: 144,
+                            left: 16,
+                            right: 16,
+                          ),
+                          padding: EdgeInsets.only(top: 8, bottom: 50),
+                          decoration: BoxDecoration(
+                            color: AppTheme.red,
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(48),
+                              topLeft: Radius.circular(48),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'What is making you worry?',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  fontFamily: AppTheme.fontFamily,
+                                  height: 1.5,
+                                  color: AppTheme.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: 182,
+                          ),
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          decoration: BoxDecoration(
+                            color: AppTheme.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(32),
+                              topRight: Radius.circular(32),
+                            ),
+                          ),
+                          child: ListView(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 24),
+                                child: Tags(
+                                  key: _tagStateKey,
+                                  alignment: WrapAlignment.start,
+                                  itemCount: _items.length,
+                                  spacing: 8,
+                                  itemBuilder: (int index) {
+                                    final item = _items[index];
+                                    return GestureDetector(
+                                      onTap: () {
+                                        _tagStateKey.currentState!.getAllItem;
+                                        _selected.add(item);
+                                      },
+                                      child: ItemTags(
+                                        key: Key(index.toString()),
+                                        index: index,
+                                        title: item.title,
+                                        active: item.active,
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 8,
+                                          horizontal: 12,
+                                        ),
+                                        activeColor: AppTheme.red,
+                                        splashColor: AppTheme.purple,
+                                        colorShowDuplicate: AppTheme.purple,
+                                        textColor: AppTheme.red,
+                                        pressEnabled: true,
+                                        textActiveColor: AppTheme.white,
+                                        elevation: 0,
+                                        color: AppTheme.white,
+                                        border: Border.all(
+                                            color: AppTheme.red),
+                                        borderRadius: BorderRadius.circular(12),
+                                        customData: '',
+                                        textStyle: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: AppTheme.fontFamily,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                        combine: ItemTagsCombine.withTextBefore,
+                                        onPressed: (item) {
+                                          print(item);
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 96),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
               Spacer(),
               Row(
                 children: [
@@ -299,16 +347,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(width: 24),
                   GestureDetector(
                     onTap: () {
-                      // for (int i = 0; i < _selectedItems.length; i++) {
-                      //   for(int j = 0; j< _selectedItems.length;j++){
-                      //     if(_selectedItems[i]!=_selectedItems[j]){
-                      //       _selected.add(_selectedItems[i]);
-                      //     }
-                      //   }
-                      // }
-
-                      // _selected = _items.where((element) => element.active == true).toList();
-
                       Navigator.push(
                         context,
                         MaterialPageRoute(
