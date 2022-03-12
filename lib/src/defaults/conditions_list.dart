@@ -17,5 +17,10 @@ List conditions = [
   Item(index: 14, title: 'Vomiting', active: false),
   Item(index: 15, title: 'Farting a lot', active: false),
   Item(index: 16, title: 'Feeling sick', active: false),
-  Item(index: 17, title: 'Earache', active: false),
+  Item(index: 18, title: 'Cold sore', active: false),
+  Item(index: 19, title: 'Feeling full', active: false),
+  Item(index: 20, title: 'Bloated after eating', active: false),
+  Item(index: 21, title: 'Heartburn', active: false),
+  Item(index: 22, title: 'Ear pain', active: false),
+  Item(index: 23, title: 'Watery poo', active: false),
 ];

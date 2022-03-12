@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ihealth/src/model/diseases_probability.dart';
 import 'package:ihealth/src/theme/app_theme.dart';
+import 'package:ihealth/src/utils/utils.dart';
 
 class PercentageText extends StatelessWidget {
   final DiseaseProbability data;
@@ -10,8 +11,9 @@ class PercentageText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RichText(
+      textAlign: TextAlign.left,
       text: TextSpan(
-        text: data.percentage.toString(),
+        text: Utils.percentageFormat(data.percentage)+'%',
         style: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 16,
@@ -31,7 +33,7 @@ class PercentageText extends StatelessWidget {
             ),
           ),
           TextSpan(
-            text: data.text,
+            text: '   '+data.text,
             style: TextStyle(
               fontWeight: FontWeight.w300,
               fontSize: 12,

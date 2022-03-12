@@ -24,9 +24,9 @@ List<DiseaseProbability> percentages(List ids) {
   for (int i = 0; i <= _selectedDiseases.length-1; i++) {
     list.add(
       DiseaseProbability(
-        percentage: _selectedDiseases[i].sum * 100 ~/ numberConditions,
+        percentage: _selectedDiseases[i].sum * 100 / numberConditions,
         disease: _selectedDiseases[i].name,
-        text: '',
+        text: _selectedDiseases[i].intro,
       ),
     );
   }

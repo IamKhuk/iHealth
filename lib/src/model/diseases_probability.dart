@@ -1,5 +1,5 @@
 class DiseaseProbability {
-  int percentage;
+  double percentage;
   String disease;
   String text;
 

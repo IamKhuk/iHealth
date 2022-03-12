@@ -185,7 +185,11 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
           SizedBox(height: 12),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 24),
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            decoration: BoxDecoration(
+              color: AppTheme.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
             child: ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
@@ -201,6 +205,7 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
                 );
               },
             ),
+
           )
         ],
       ),
