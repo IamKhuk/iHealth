@@ -1,13 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tags_x/flutter_tags_x.dart';
 import 'package:ihealth/src/defaults/advices_list.dart';
 import 'package:ihealth/src/defaults/conditions_list.dart';
 import 'package:ihealth/src/theme/app_theme.dart';
 
-class HomeScreen extends StatefulWidget {
+import 'diagnose_screen.dart';
 
+class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -16,7 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     for (int i = 0; i < conditions.length; i++) {
-      _items.add(Item(title: conditions[i].name, active: false, index: i));
+      _items.add(
+        Item(
+          title: conditions[i].name,
+          active: false,
+          index: i,
+          customData: '',
+        ),
+      );
     }
     super.initState();
   }
@@ -24,13 +33,41 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<TagsState> _tagStateKey = GlobalKey<TagsState>();
   List _items = [];
 
+  List<String> _selectedItems = [];
+
+  List<String> _selected = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.bg,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppTheme.bg,
         brightness: Brightness.light,
+        leadingWidth: 76,
+        leading: Row(
+          children: [
+            SizedBox(width: 36),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: AppTheme.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/icons/menu.svg',
+                    color: AppTheme.red,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
         title: Text(
           'Diagnose',
           style: TextStyle(
@@ -42,6 +79,32 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         centerTitle: true,
+        actions: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  // _scaffoldKey.currentState!.openEndDrawer();
+                },
+                child: Container(
+                  height: 40,
+                  width: 40,
+                  padding: EdgeInsets.all(11),
+                  decoration: BoxDecoration(
+                    color: AppTheme.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/icons/help.svg',
+                    color: AppTheme.red,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 36),
+        ],
       ),
       body: Stack(
         children: [
@@ -75,13 +138,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: _items.length,
                         spacing: 8,
                         itemBuilder: (int index) {
-                          final item = _items[index];
                           return ItemTags(
                             key: Key(index.toString()),
                             index: index,
-                            // required
-                            title: item.title,
-                            active: item.active,
+                            title: _items[index].title,
+                            active: _items[index].active,
                             padding: EdgeInsets.symmetric(
                               vertical: 8,
                               horizontal: 12,
@@ -90,24 +151,27 @@ class _HomeScreenState extends State<HomeScreen> {
                             splashColor: AppTheme.purple,
                             colorShowDuplicate: AppTheme.purple,
                             textColor: AppTheme.red,
+                            pressEnabled: true,
                             textActiveColor: AppTheme.white,
                             elevation: 0,
                             color: AppTheme.white,
                             border: Border.all(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(12),
-                            customData: item.customData,
+                            customData: '',
                             textStyle: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.fontFamily,
                               fontWeight: FontWeight.normal,
                             ),
                             combine: ItemTagsCombine.withTextBefore,
-                            onPressed: (item) => print(item),
+                            onPressed: (item) {
+                              print(item);
+                            },
                           );
                         },
                       ),
                     ),
-                    SizedBox(height: 168),
+                    SizedBox(height: 96),
                   ],
                 ),
               ),
@@ -153,6 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   AppTheme.red.withOpacity(0.7),
                                   AppTheme.red.withOpacity(0.4),
                                   AppTheme.red.withOpacity(0.1),
+                                  Colors.transparent,
                                 ],
                               ),
                             ),
@@ -171,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         fontSize: 12,
                                         fontFamily: AppTheme.fontFamily,
                                         height: 1.5,
-                                        color: AppTheme.black,
+                                        color: AppTheme.white,
                                       ),
                                     ),
                                   ),
@@ -197,35 +262,55 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Spacer(),
-              Container(
-                height: 56,
-                margin: EdgeInsets.symmetric(horizontal: 24),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: AppTheme.red,
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(5, 9),
-                      blurRadius: 15,
-                      spreadRadius: 0,
-                      color: AppTheme.gray,
+              GestureDetector(
+                onTap: () {
+                  for (int i = 0; i < _selectedItems.length; i++) {
+                    for(int j = 0; j< _selectedItems.length;j++){
+                      if(_selectedItems[i]!=_selectedItems[j]){
+                        _selected.add(_selectedItems[i]);
+                      }
+                    }
+                  }
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return DiagnoseScreen(items: _selectedItems);
+                      },
                     ),
-                  ],
-                ),
-                child: Center(
-                  child: Text(
-                    'Diagnose',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      fontFamily: AppTheme.fontFamily,
-                      height: 1.5,
-                      color: AppTheme.white,
+                  );
+                  print(_selected);
+                },
+                child: Container(
+                  height: 56,
+                  margin: EdgeInsets.symmetric(horizontal: 24),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: AppTheme.red,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(5, 9),
+                        blurRadius: 15,
+                        spreadRadius: 0,
+                        color: AppTheme.gray,
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Diagnose',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        fontFamily: AppTheme.fontFamily,
+                        height: 1.5,
+                        color: AppTheme.white,
+                      ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 96),
+              SizedBox(height: 24),
             ],
           ),
         ],
