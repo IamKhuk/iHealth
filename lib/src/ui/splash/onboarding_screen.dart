@@ -13,7 +13,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.white,
+      backgroundColor: AppTheme.bg,
       body: Stack(
         children: [
           Column(
@@ -41,18 +41,26 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       ),
                     ],
                   ),
+                  CustomPaint(
+                    size: Size(MediaQuery.of(context).size.width, 90),
+                    painter: RPSCustomPainter(),
+                  )
                 ],
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.48 + 16),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.48 + 17,
+                width: MediaQuery.of(context).size.width,
+                color: AppTheme.white,
+              ),
             ],
           ),
           Column(
             children: [
               SizedBox(height: 40),
-              SvgPicture.asset(
-                'assets/images/elements.svg',
-                color: AppTheme.red,
-              ),
+              // SvgPicture.asset(
+              //   'assets/images/elements.svg',
+              //   color: AppTheme.red,
+              // ),
               Spacer(),
               Container(
                 height: MediaQuery.of(context).size.height * 0.48,
@@ -157,5 +165,109 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         ],
       ),
     );
+  }
+}
+
+class RPSCustomPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint0 = Paint()
+      ..color = const Color.fromARGB(255, 255, 255, 255)
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 1.0;
+
+    Path path0 = Path();
+    path0.moveTo(0, size.height * 0.6666667);
+    path0.quadraticBezierTo(size.width * 0.0343750, size.height * 0.2525000,
+        size.width * 0.0850000, size.height * 0.2733333);
+    path0.cubicTo(
+        size.width * 0.1459375,
+        size.height * 0.3075000,
+        size.width * 0.1062500,
+        size.height * 0.7466667,
+        size.width * 0.1787500,
+        size.height * 0.6333333);
+    path0.cubicTo(
+        size.width * 0.1956250,
+        size.height * 0.5725000,
+        size.width * 0.2018750,
+        size.height * 0.4841667,
+        size.width * 0.2337500,
+        size.height * 0.4300000);
+    path0.cubicTo(
+        size.width * 0.2659375,
+        size.height * 0.3950000,
+        size.width * 0.2750000,
+        size.height * 0.4975000,
+        size.width * 0.2825000,
+        size.height * 0.5900000);
+    path0.cubicTo(
+        size.width * 0.3265625,
+        size.height * 0.6408333,
+        size.width * 0.3259375,
+        size.height * 0.4941667,
+        size.width * 0.3775000,
+        size.height * 0.3833333);
+    path0.cubicTo(
+        size.width * 0.4153125,
+        size.height * 0.3591667,
+        size.width * 0.4121875,
+        size.height * 0.4508333,
+        size.width * 0.4387500,
+        size.height * 0.5300000);
+    path0.cubicTo(
+        size.width * 0.4887500,
+        size.height * 0.6675000,
+        size.width * 0.5737500,
+        size.height * 0.1358333,
+        size.width * 0.6350000,
+        size.height * 0.0966667);
+    path0.cubicTo(
+        size.width * 0.6921875,
+        size.height * 0.1016667,
+        size.width * 0.6584375,
+        size.height * 0.4375000,
+        size.width * 0.6850000,
+        size.height * 0.5466667);
+    path0.cubicTo(
+        size.width * 0.7212500,
+        size.height * 0.6733333,
+        size.width * 0.7415625,
+        size.height * 0.3941667,
+        size.width * 0.7850000,
+        size.height * 0.3600000);
+    path0.cubicTo(
+        size.width * 0.8178125,
+        size.height * 0.3908333,
+        size.width * 0.7878125,
+        size.height * 0.4266667,
+        size.width * 0.8237500,
+        size.height * 0.4466667);
+    path0.cubicTo(
+        size.width * 0.8653125,
+        size.height * 0.3891667,
+        size.width * 0.8896875,
+        size.height * 0.2350000,
+        size.width * 0.9275000,
+        size.height * 0.1533333);
+    path0.cubicTo(
+        size.width * 0.9796875,
+        size.height * 0.0816667,
+        size.width * 0.9803125,
+        size.height * 0.4083333,
+        size.width,
+        size.height * 0.4000000);
+    path0.quadraticBezierTo(size.width, size.height * 0.5499500, size.width,
+        size.height * 0.9998000);
+    path0.lineTo(0, size.height);
+    path0.lineTo(0, size.height * 0.6666667);
+    path0.close();
+
+    canvas.drawPath(path0, paint0);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
