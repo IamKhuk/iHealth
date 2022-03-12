@@ -360,9 +360,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   List<Item>? _getSelectedItem() {
+    List<Item>? selected = [];
     List<Item>? list = _tagStateKey.currentState?.getAllItem;
     if (list != null)
       list.where((a) => a.active == true).forEach((a) => print(a.title));
-    return list;
+    selected = list!.where((element) => element.active == true).toList();
+    return selected;
   }
 }
