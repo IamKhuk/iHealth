@@ -2,12 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tags_x/flutter_tags_x.dart';
+import 'package:ihealth/src/model/diseases_probability.dart';
 import 'package:ihealth/src/theme/app_theme.dart';
+import 'package:ihealth/src/utils/percentages_function.dart';
+import 'package:ihealth/src/widgets/percentage_rich_text.dart';
 
 class DiagnoseScreen extends StatefulWidget {
   final List<Item>? items;
+  final List<int?> ids;
 
-  DiagnoseScreen({required this.items});
+  DiagnoseScreen({
+    required this.items,
+    required this.ids,
+  });
 
   @override
   _DiagnoseScreenState createState() => _DiagnoseScreenState();
@@ -17,11 +24,13 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
   @override
   void initState() {
     _items = widget.items!;
+    _list = percentages(widget.ids);
     super.initState();
   }
 
   final GlobalKey<TagsState> _tagStateKey = GlobalKey<TagsState>();
   List _items = [];
+  late List<DiseaseProbability> _list;
 
   @override
   Widget build(BuildContext context) {
@@ -173,6 +182,26 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
               ),
             ],
           ),
+          SizedBox(height: 12),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: _list.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    PercentageText(data: _list[index]),
+                    index == _list.length - 1
+                        ? SizedBox(height: 0)
+                        : SizedBox(height: 8),
+                  ],
+                );
+              },
+            ),
+          )
         ],
       ),
     );

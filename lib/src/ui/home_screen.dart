@@ -27,8 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final GlobalKey<TagsState> _tagStateKey = GlobalKey<TagsState>();
   List _items = [];
-
-  List _selected = [];
+  List<int?> _ids = [];
 
   @override
   Widget build(BuildContext context) {
@@ -273,8 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       textActiveColor: AppTheme.white,
                                       elevation: 0,
                                       color: AppTheme.white,
-                                      border: Border.all(
-                                          color: AppTheme.red),
+                                      border: Border.all(color: AppTheme.red),
                                       borderRadius: BorderRadius.circular(12),
                                       customData: '',
                                       textStyle: TextStyle(
@@ -341,11 +339,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(width: 24),
                   GestureDetector(
                     onTap: () {
+                      for (int i = 0;
+                          i <= _getSelectedItem()!.length - 1;
+                          i++) {
+                        _ids.add(_getSelectedItem()![i].index);
+                      }
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return DiagnoseScreen(items: _getSelectedItem());
+                            return DiagnoseScreen(
+                              items: _getSelectedItem(),
+                              ids: _ids,
+                            );
                           },
                         ),
                       );
