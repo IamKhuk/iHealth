@@ -262,53 +262,91 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Spacer(),
-              GestureDetector(
-                onTap: () {
-                  for (int i = 0; i < _selectedItems.length; i++) {
-                    for(int j = 0; j< _selectedItems.length;j++){
-                      if(_selectedItems[i]!=_selectedItems[j]){
-                        _selected.add(_selectedItems[i]);
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 56,
+                      width: (MediaQuery.of(context).size.width-72)/3,
+                      margin: EdgeInsets.only(left: 24),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: AppTheme.red,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(5, 9),
+                            blurRadius: 15,
+                            spreadRadius: 0,
+                            color: AppTheme.gray,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          'SOS',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            fontFamily: AppTheme.fontFamily,
+                            height: 1.5,
+                            color: AppTheme.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 24),
+                  GestureDetector(
+                    onTap: () {
+                      for (int i = 0; i < _selectedItems.length; i++) {
+                        for(int j = 0; j< _selectedItems.length;j++){
+                          if(_selectedItems[i]!=_selectedItems[j]){
+                            _selected.add(_selectedItems[i]);
+                          }
+                        }
                       }
-                    }
-                  }
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return DiagnoseScreen(items: _selectedItems);
-                      },
-                    ),
-                  );
-                  print(_selected);
-                },
-                child: Container(
-                  height: 56,
-                  margin: EdgeInsets.symmetric(horizontal: 24),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: AppTheme.red,
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(5, 9),
-                        blurRadius: 15,
-                        spreadRadius: 0,
-                        color: AppTheme.gray,
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return DiagnoseScreen(items: _selectedItems);
+                          },
+                        ),
+                      );
+                      print(_selected);
+                    },
+                    child: Container(
+                      height: 56,
+                      width: (MediaQuery.of(context).size.width-72)/1.5,
+                      margin: EdgeInsets.only(right: 24),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: AppTheme.red,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(5, 9),
+                            blurRadius: 15,
+                            spreadRadius: 0,
+                            color: AppTheme.gray,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Diagnose',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        fontFamily: AppTheme.fontFamily,
-                        height: 1.5,
-                        color: AppTheme.white,
+                      child: Center(
+                        child: Text(
+                          'Diagnose',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            fontFamily: AppTheme.fontFamily,
+                            height: 1.5,
+                            color: AppTheme.white,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
               SizedBox(height: 24),
             ],
