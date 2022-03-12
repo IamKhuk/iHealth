@@ -256,42 +256,36 @@ class _HomeScreenState extends State<HomeScreen> {
                                   spacing: 8,
                                   itemBuilder: (int index) {
                                     final item = _items[index];
-                                    return GestureDetector(
-                                      onTap: () {
-                                        _tagStateKey.currentState!.getAllItem;
-                                        _selected.add(item);
-                                      },
-                                      child: ItemTags(
-                                        key: Key(index.toString()),
-                                        index: index,
-                                        title: item.title,
-                                        active: item.active,
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 8,
-                                          horizontal: 12,
-                                        ),
-                                        activeColor: AppTheme.red,
-                                        splashColor: AppTheme.purple,
-                                        colorShowDuplicate: AppTheme.purple,
-                                        textColor: AppTheme.red,
-                                        pressEnabled: true,
-                                        textActiveColor: AppTheme.white,
-                                        elevation: 0,
-                                        color: AppTheme.white,
-                                        border: Border.all(
-                                            color: AppTheme.red),
-                                        borderRadius: BorderRadius.circular(12),
-                                        customData: '',
-                                        textStyle: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: AppTheme.fontFamily,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                        combine: ItemTagsCombine.withTextBefore,
-                                        onPressed: (item) {
-                                          print(item);
-                                        },
+                                    return ItemTags(
+                                      key: Key(index.toString()),
+                                      index: index,
+                                      title: item.title,
+                                      active: item.active,
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 8,
+                                        horizontal: 12,
                                       ),
+                                      activeColor: AppTheme.red,
+                                      splashColor: AppTheme.purple,
+                                      colorShowDuplicate: AppTheme.purple,
+                                      textColor: AppTheme.red,
+                                      pressEnabled: true,
+                                      textActiveColor: AppTheme.white,
+                                      elevation: 0,
+                                      color: AppTheme.white,
+                                      border: Border.all(
+                                          color: AppTheme.red),
+                                      borderRadius: BorderRadius.circular(12),
+                                      customData: '',
+                                      textStyle: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: AppTheme.fontFamily,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                      combine: ItemTagsCombine.withTextBefore,
+                                      onPressed: (item) {
+                                        print(item);
+                                      },
                                     );
                                   },
                                 ),

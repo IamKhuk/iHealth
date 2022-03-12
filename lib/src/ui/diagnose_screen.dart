@@ -94,18 +94,29 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
           SizedBox(width: 36),
         ],
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            pinned: false,
-            floating: false,
-            snap: false,
-            backgroundColor: AppTheme.bg,
-            leading: Container(),
-            leadingWidth: 0,
-            elevation: 0,
-            centerTitle: true,
-            title: Tags(
+      body: ListView(
+        children: [
+          SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: 24),
+              Text(
+                'Selected conditions',
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                  fontFamily: AppTheme.fontFamily,
+                  height: 1.5,
+                  color: AppTheme.black,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Tags(
               key: _tagStateKey,
               alignment: WrapAlignment.start,
               itemCount: _items.length,
@@ -116,31 +127,51 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
                   key: Key(index.toString()),
                   index: index,
                   title: item.title,
-                  active: true,
+                  active: item.active,
                   padding: EdgeInsets.symmetric(
                     vertical: 8,
                     horizontal: 12,
                   ),
                   activeColor: AppTheme.red,
-                  splashColor: AppTheme.red,
-                  colorShowDuplicate: AppTheme.red,
-                  textColor: AppTheme.white,
+                  splashColor: AppTheme.purple,
+                  colorShowDuplicate: AppTheme.purple,
+                  textColor: AppTheme.red,
+                  pressEnabled: false,
                   textActiveColor: AppTheme.white,
                   elevation: 0,
-                  color: AppTheme.red,
-                  border: Border.all(color: Colors.transparent),
+                  color: AppTheme.white,
+                  border: Border.all(color: AppTheme.red),
                   borderRadius: BorderRadius.circular(12),
-                  customData: item.customData,
+                  customData: '',
                   textStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.fontFamily,
                     fontWeight: FontWeight.normal,
                   ),
                   combine: ItemTagsCombine.withTextBefore,
-                  onPressed: (item) => print(item),
+                  onPressed: (item) {
+                    print(item);
+                  },
                 );
               },
             ),
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: 24),
+              Text(
+                'Disease Probability',
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                  fontFamily: AppTheme.fontFamily,
+                  height: 1.5,
+                  color: AppTheme.black,
+                ),
+              ),
+            ],
           ),
         ],
       ),
