@@ -5,7 +5,7 @@ import 'package:flutter_tags_x/flutter_tags_x.dart';
 import 'package:ihealth/src/theme/app_theme.dart';
 
 class DiagnoseScreen extends StatefulWidget {
-  final List items;
+  final List<Item>? items;
 
   DiagnoseScreen({required this.items});
 
@@ -16,7 +16,7 @@ class DiagnoseScreen extends StatefulWidget {
 class _DiagnoseScreenState extends State<DiagnoseScreen> {
   @override
   void initState() {
-    _items = widget.items;
+    _items = widget.items!;
     super.initState();
   }
 

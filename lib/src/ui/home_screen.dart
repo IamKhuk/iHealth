@@ -19,12 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     for (int i = 0; i < conditions.length; i++) {
       _items.add(
-        Item(
-          title: conditions[i].name,
-          active: false,
-          index: i,
-          customData: '',
-        ),
+        conditions[i],
       );
     }
     super.initState();
@@ -33,9 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<TagsState> _tagStateKey = GlobalKey<TagsState>();
   List _items = [];
 
-  List<String> _selectedItems = [];
-
-  List<String> _selected = [];
+  List _selected = [];
 
   @override
   Widget build(BuildContext context) {
@@ -138,35 +131,42 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: _items.length,
                         spacing: 8,
                         itemBuilder: (int index) {
-                          return ItemTags(
-                            key: Key(index.toString()),
-                            index: index,
-                            title: _items[index].title,
-                            active: _items[index].active,
-                            padding: EdgeInsets.symmetric(
-                              vertical: 8,
-                              horizontal: 12,
-                            ),
-                            activeColor: AppTheme.red,
-                            splashColor: AppTheme.purple,
-                            colorShowDuplicate: AppTheme.purple,
-                            textColor: AppTheme.red,
-                            pressEnabled: true,
-                            textActiveColor: AppTheme.white,
-                            elevation: 0,
-                            color: AppTheme.white,
-                            border: Border.all(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(12),
-                            customData: '',
-                            textStyle: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.fontFamily,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            combine: ItemTagsCombine.withTextBefore,
-                            onPressed: (item) {
-                              print(item);
+                          final item = _items[index];
+                          return GestureDetector(
+                            onTap: () {
+                              _tagStateKey.currentState!.getAllItem;
+                              _selected.add(item);
                             },
+                            child: ItemTags(
+                              key: Key(index.toString()),
+                              index: index,
+                              title: item.title,
+                              active: item.active,
+                              padding: EdgeInsets.symmetric(
+                                vertical: 8,
+                                horizontal: 12,
+                              ),
+                              activeColor: AppTheme.red,
+                              splashColor: AppTheme.purple,
+                              colorShowDuplicate: AppTheme.purple,
+                              textColor: AppTheme.red,
+                              pressEnabled: true,
+                              textActiveColor: AppTheme.white,
+                              elevation: 0,
+                              color: AppTheme.white,
+                              border: Border.all(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(12),
+                              customData: '',
+                              textStyle: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.fontFamily,
+                                fontWeight: FontWeight.normal,
+                              ),
+                              combine: ItemTagsCombine.withTextBefore,
+                              onPressed: (item) {
+                                print(item);
+                              },
+                            ),
                           );
                         },
                       ),
@@ -268,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {},
                     child: Container(
                       height: 56,
-                      width: (MediaQuery.of(context).size.width-72)/3,
+                      width: (MediaQuery.of(context).size.width - 72) / 3,
                       margin: EdgeInsets.only(left: 24),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
@@ -299,26 +299,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(width: 24),
                   GestureDetector(
                     onTap: () {
-                      for (int i = 0; i < _selectedItems.length; i++) {
-                        for(int j = 0; j< _selectedItems.length;j++){
-                          if(_selectedItems[i]!=_selectedItems[j]){
-                            _selected.add(_selectedItems[i]);
-                          }
-                        }
-                      }
+                      // for (int i = 0; i < _selectedItems.length; i++) {
+                      //   for(int j = 0; j< _selectedItems.length;j++){
+                      //     if(_selectedItems[i]!=_selectedItems[j]){
+                      //       _selected.add(_selectedItems[i]);
+                      //     }
+                      //   }
+                      // }
+
+                      // _selected = _items.where((element) => element.active == true).toList();
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return DiagnoseScreen(items: _selectedItems);
+                            return DiagnoseScreen(items: _getSelectedItem());
                           },
                         ),
                       );
-                      print(_selected);
+                      print(_getSelectedItem());
                     },
                     child: Container(
                       height: 56,
-                      width: (MediaQuery.of(context).size.width-72)/1.5,
+                      width: (MediaQuery.of(context).size.width - 72) / 1.5,
                       margin: EdgeInsets.only(right: 24),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
@@ -354,5 +357,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  List<Item>? _getSelectedItem() {
+    List<Item>? list = _tagStateKey.currentState?.getAllItem;
+    if (list != null)
+      list.where((a) => a.active == true).forEach((a) => print(a.title));
+    return list;
   }
 }
