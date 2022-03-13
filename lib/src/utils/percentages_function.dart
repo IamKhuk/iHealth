@@ -29,6 +29,7 @@ List<DiseaseProbability> percentages(List ids) {
         text: _selectedDiseases[i].intro,
         diagnose: _selectedDiseases[i].diagnose,
         rec: _selectedDiseases[i].recommendation,
+        drugs: _selectedDiseases[i].drugs,
       ),
     );
   }

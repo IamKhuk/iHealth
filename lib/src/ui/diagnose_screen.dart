@@ -32,13 +32,16 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
         _listBool.add(false);
       }
     }
-
-    for(int i = 0; i<=_listBool.length-1;i++){
-      if (_listBool.contains(true)) {
-        _diagnose = _list[_listBool.indexOf(true)].diagnose;
-      } else {
-        _diagnose.add(_list[i].rec);
+    if (_listBool.contains(true)) {
+      _diagnose = _list[_listBool.indexOf(true)].diagnose;
+      onDiagnose = true;
+    } else {
+      List<String> recList = [];
+      for (int i = 0; i <= _listBool.length - 1; i++) {
+        recList.add(_list[i].rec);
       }
+      onDiagnose = false;
+      _diagnose = recList;
     }
     super.initState();
   }
@@ -48,7 +51,7 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
   late List<DiseaseProbability> _list;
   late bool onDiagnose;
   late List<String> _diagnose;
-  late List<bool> _listBool;
+  late List<bool> _listBool = [];
 
   @override
   Widget build(BuildContext context) {
@@ -255,15 +258,22 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
               physics: NeverScrollableScrollPhysics(),
               itemCount: _diagnose.length,
               itemBuilder: (context, index) {
-                return Text(
-                  _diagnose[index],
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontSize: 12,
-                    fontFamily: AppTheme.fontFamily,
-                    height: 1.5,
-                    color: AppTheme.dark,
-                  ),
+                return Column(
+                  children: [
+                    Text(
+                      _diagnose[index],
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 12,
+                        fontFamily: AppTheme.fontFamily,
+                        height: 1.5,
+                        color: AppTheme.dark,
+                      ),
+                    ),
+                    index == _list.length - 1
+                        ? SizedBox(height: 0)
+                        : SizedBox(height: 12),
+                  ],
                 );
               },
             ),

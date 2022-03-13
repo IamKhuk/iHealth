@@ -26,6 +26,7 @@ List<Diseases> diseases = [
         'Find out how ibuprofen treats pain and swelling (inflammation), and how to take it.',
       ),
     ],
+    recommendation: 'We will suggest you to consume the following drugs to ease pain or make an appointment with General Practitioners',
   ),
   Diseases(
     name: 'Flu',
@@ -51,6 +52,7 @@ List<Diseases> diseases = [
         'Find out how ibuprofen treats pain and swelling (inflammation), and how to take it.',
       ),
     ],
+    recommendation: 'Go and take the Blood Test, the probability of having a flu is high but we cannot tell exactly based on your condition, so it would be better if you get a proper diagnose after taking a Blood Test',
   ),
   Diseases(
     name: 'Cold sore',
@@ -72,6 +74,7 @@ List<Diseases> diseases = [
         text: 'Creams to ease pain and irritation.',
       ),
     ],
+    recommendation: 'You can buy electronic devices from pharmacies that treat cold sores with light or lasers.',
   ),
   Diseases(
     name: 'Stomach ache',
@@ -94,6 +97,7 @@ List<Diseases> diseases = [
         'Proton pump inhibitors (PPIs) are medicines that work by reducing the amount of stomach acid made by glands in the lining of your stomach.',
       ),
     ],
+    recommendation: 'Do not self-diagnose – see a GP if you\'re worried. You can ask a pharmacist about: what might be causing your stomach ache, treatments that might help, medicines for constipation and indigestion',
   ),
   Diseases(
     name: 'Earache',
@@ -118,6 +122,7 @@ List<Diseases> diseases = [
         'Ear drops can be used to treat or prevent ear infections or to help remove earwax.',
       ),
     ],
+    recommendation: 'A pharmacist might be able to tell you: what you can do to treat earache, yourself if you can buy anything to help (for example, eardrops), if you need to see a GP.',
   ),
   Diseases(
     name: 'Trapped wind',
@@ -141,6 +146,7 @@ List<Diseases> diseases = [
         'Charcoal can absorb gas in the bowel, thus helping with the symptoms of excessive flatulence.',
       ),
     ],
+    recommendation: 'Speak to a pharmacist about excessive or smelly farts.',
   ),
   Diseases(
     name: 'Indigestion',
@@ -163,6 +169,7 @@ List<Diseases> diseases = [
         'Proton pump inhibitors (PPIs) are medicines that work by reducing the amount of stomach acid made by glands in the lining of your stomach.',
       ),
     ],
+    recommendation: 'A pharmacist can recommend medicines to ease the burning feeling or pain that can come with indigestion.',
   ),
   Diseases(
     name: 'Constipation',
@@ -192,6 +199,7 @@ List<Diseases> diseases = [
         'Bisacodyl is a laxative. This type of medicine can help you empty your bowels if you have constipation (difficulty pooing).',
       ),
     ],
+    recommendation: 'Make changes to your diet: drink plenty of fluids and avoid alcohol, increase the fibre in your diet, add some wheat bran, oats or linseed to your diet.',
   ),
   Diseases(
     name: 'Diarrhoea or Food poisoning',
