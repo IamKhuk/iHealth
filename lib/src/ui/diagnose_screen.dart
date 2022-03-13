@@ -25,12 +25,30 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
   void initState() {
     _items = widget.items!;
     _list = percentages(widget.ids);
+    for (int i = 0; i <= _list.length - 1; i++) {
+      if (_list[i].percentage > 75) {
+        _listBool.add(true);
+      } else {
+        _listBool.add(false);
+      }
+    }
+
+    for(int i = 0; i<=_listBool.length-1;i++){
+      if (_listBool.contains(true)) {
+        _diagnose = _list[_listBool.indexOf(true)].diagnose;
+      } else {
+        _diagnose.add(_list[i].rec);
+      }
+    }
     super.initState();
   }
 
   final GlobalKey<TagsState> _tagStateKey = GlobalKey<TagsState>();
   List _items = [];
   late List<DiseaseProbability> _list;
+  late bool onDiagnose;
+  late List<String> _diagnose;
+  late List<bool> _listBool;
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +122,7 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
         ],
       ),
       body: ListView(
+        padding: EdgeInsets.only(bottom: 24),
         children: [
           SizedBox(height: 16),
           Row(
@@ -205,7 +224,49 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
                 );
               },
             ),
-
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: 24),
+              Text(
+                onDiagnose == true ? 'Diagnose' : 'Suggestions',
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                  fontFamily: AppTheme.fontFamily,
+                  height: 1.5,
+                  color: AppTheme.black,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 12),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            decoration: BoxDecoration(
+              color: AppTheme.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: _diagnose.length,
+              itemBuilder: (context, index) {
+                return Text(
+                  _diagnose[index],
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: 12,
+                    fontFamily: AppTheme.fontFamily,
+                    height: 1.5,
+                    color: AppTheme.dark,
+                  ),
+                );
+              },
+            ),
           )
         ],
       ),

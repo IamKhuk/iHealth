@@ -27,6 +27,8 @@ List<DiseaseProbability> percentages(List ids) {
         percentage: _selectedDiseases[i].sum * 100 / numberConditions,
         disease: _selectedDiseases[i].name,
         text: _selectedDiseases[i].intro,
+        diagnose: _selectedDiseases[i].diagnose,
+        rec: _selectedDiseases[i].recommendation,
       ),
     );
   }

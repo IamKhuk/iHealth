@@ -22,6 +22,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: SvgPicture.asset(
+                          'assets/icons/red.svg',
+                          height: 300,
+                          color: AppTheme.red,
+                        ),
+                      ),
+                      SizedBox(height: 50,)
+                    ],
+                  ),
                   Row(
                     children: [
                       SizedBox(width: 20),
