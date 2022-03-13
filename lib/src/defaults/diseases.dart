@@ -16,11 +16,13 @@ List<Diseases> diseases = [
     ],
     drugs: [
       DrugsModel(
+        img: 'assets/images/paracetamol.png',
         title: 'Paracetamol',
         text:
         'Paracetamol is a common painkiller used to treat aches and pain. It can also be used to reduce a high temperature.',
       ),
       DrugsModel(
+        img: 'assets/images/ibuprofen.png',
         title: 'Ibuprofen',
         text:
         'Find out how ibuprofen treats pain and swelling (inflammation), and how to take it.',
@@ -42,11 +44,13 @@ List<Diseases> diseases = [
     ],
     drugs: [
       DrugsModel(
+        img: 'assets/images/paracetamol.png',
         title: 'Paracetamol',
         text:
         'Paracetamol is a common painkiller used to treat aches and pain. It can also be used to reduce a high temperature.',
       ),
       DrugsModel(
+        img: 'assets/images/ibuprofen.png',
         title: 'Ibuprofen',
         text:
         'Find out how ibuprofen treats pain and swelling (inflammation), and how to take it.',
@@ -66,10 +70,12 @@ List<Diseases> diseases = [
     ],
     drugs: [
       DrugsModel(
+        img: 'assets/images/cold_sore_patches.png',
         title: 'Cold sore patches',
         text: 'Cold sore patches to protect the skin while it heals.',
       ),
       DrugsModel(
+        img: 'assets/images/zovirax.png',
         title: 'Zovirax',
         text: 'Creams to ease pain and irritation.',
       ),
@@ -87,11 +93,13 @@ List<Diseases> diseases = [
     ],
     drugs: [
       DrugsModel(
+        img: 'assets/images/antacid.png',
         title: 'Antacids',
         text:
         'An antacid is a substance which neutralizes stomach acidity and is used to relieve heartburn, indigestion or an upset stomach.',
       ),
       DrugsModel(
+        img: 'assets/images/prilosec.png',
         title: 'Prilosec',
         text:
         'Proton pump inhibitors (PPIs) are medicines that work by reducing the amount of stomach acid made by glands in the lining of your stomach.',
@@ -112,6 +120,7 @@ List<Diseases> diseases = [
     ],
     drugs: [
       DrugsModel(
+        img: 'assets/images/natrullo.png',
         title: 'Natrullo',
         text:
         'Ear drops can be used to treat or prevent ear infections or to help remove earwax.',
@@ -131,11 +140,13 @@ List<Diseases> diseases = [
     ],
     drugs: [
       DrugsModel(
+        img: 'assets/images/antacid.png',
         title: 'Antacids',
         text:
         'Charcoal can absorb gas in the bowel, thus helping with the symptoms of excessive flatulence.',
       ),
       DrugsModel(
+        img: 'assets/images/bragg.png',
         title: 'Bragg\'s Medicinal Charcoal',
         text:
         'Charcoal can absorb gas in the bowel, thus helping with the symptoms of excessive flatulence.',
@@ -154,11 +165,13 @@ List<Diseases> diseases = [
     ],
     drugs: [
       DrugsModel(
+        img: 'assets/images/antacid.png',
         title: 'Antacids',
         text:
         'An antacid is a substance which neutralizes stomach acidity and is used to relieve heartburn, indigestion or an upset stomach.',
       ),
       DrugsModel(
+        img: 'assets/images/prilosec.png',
         title: 'Prilosec',
         text:
         'Proton pump inhibitors (PPIs) are medicines that work by reducing the amount of stomach acid made by glands in the lining of your stomach.',
@@ -179,16 +192,19 @@ List<Diseases> diseases = [
     ],
     drugs: [
       DrugsModel(
+        img: 'assets/images/fybogel.png',
         title: 'Fybogel (ispaghula husk)',
         text:
         'Bulk-forming laxatives work by increasing the "bulk" or weight of poo, which in turn stimulates your bowel.',
       ),
       DrugsModel(
+        img: 'assets/images/lactulose.png',
         title: 'Lactulose',
         text:
         'Lactulose is a laxative taken to treat constipation (difficulty pooing).',
       ),
       DrugsModel(
+        img: 'assets/images/bisacodyl.png',
         title: 'Bisacodyl',
         text:
         'Bisacodyl is a laxative. This type of medicine can help you empty your bowels if you have constipation (difficulty pooing).',
@@ -208,11 +224,13 @@ List<Diseases> diseases = [
     ],
     drugs: [
       DrugsModel(
+        img: 'assets/images/loperamide.png',
         title: 'Loperamide',
         text:
         'Loperamide is a medicine to treat diarrhoea (runny poo). It can help with short-term diarrhoea or irritable bowel syndrome (IBS).',
       ),
       DrugsModel(
+        img: 'assets/images/prilosec.png',
         title: 'Prilosec',
         text:
         'Proton pump inhibitors (PPIs) are medicines that work by reducing the amount of stomach acid made by glands in the lining of your stomach.',

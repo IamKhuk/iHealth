@@ -11,19 +11,12 @@ class DrugsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 144,
-      width: 112,
       margin: EdgeInsets.only(right: 16),
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppTheme.white,
-        borderRadius: BorderRadius.circular(20),
-      ),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-            height: 82,
-            width: 112,
+            padding: EdgeInsets.only(top: 48, right: 24, left: 24, bottom: 16,),
             decoration: BoxDecoration(
               color: AppTheme.white,
               borderRadius: BorderRadius.circular(20),
@@ -49,8 +42,8 @@ class DrugsContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 80,
-                width: 80,
+                height: 100,
+                width: 100,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Image.asset(
@@ -59,7 +52,7 @@ class DrugsContainer extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 64),
+              SizedBox(height: 44),
             ],
           ),
         ],

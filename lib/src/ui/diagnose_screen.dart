@@ -5,6 +5,7 @@ import 'package:flutter_tags_x/flutter_tags_x.dart';
 import 'package:ihealth/src/model/diseases_probability.dart';
 import 'package:ihealth/src/model/drugs_model.dart';
 import 'package:ihealth/src/theme/app_theme.dart';
+import 'package:ihealth/src/ui/waiting_screen.dart';
 import 'package:ihealth/src/utils/percentages_function.dart';
 import 'package:ihealth/src/widgets/drugs_container.dart';
 import 'package:ihealth/src/widgets/percentage_rich_text.dart';
@@ -34,7 +35,7 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
       } else {
         _listBool.add(false);
       }
-      for(int j = 0; j<=_list[i].drugs.length-1;j++){
+      for (int j = 0; j <= _list[i].drugs.length - 1; j++) {
         drugs.add(_list[i].drugs[j]);
       }
     }
@@ -87,7 +88,7 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
                 child: Center(
                   child: SvgPicture.asset(
                     'assets/icons/left.svg',
-                    color: AppTheme.red,
+                    color: AppTheme.black,
                   ),
                 ),
               ),
@@ -123,7 +124,7 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
                   ),
                   child: SvgPicture.asset(
                     'assets/icons/help.svg',
-                    color: AppTheme.red,
+                    color: AppTheme.black,
                   ),
                 ),
               ),
@@ -132,189 +133,283 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
           SizedBox(width: 36),
         ],
       ),
-      body: ListView(
-        padding: EdgeInsets.only(bottom: 24),
+      body: Stack(
         children: [
-          SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          ListView(
+            padding: EdgeInsets.only(bottom: 24),
             children: [
-              SizedBox(width: 24),
-              Text(
-                'Selected conditions',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 18,
-                  fontFamily: AppTheme.fontFamily,
-                  height: 1.5,
-                  color: AppTheme.black,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Tags(
-              key: _tagStateKey,
-              alignment: WrapAlignment.start,
-              itemCount: _items.length,
-              spacing: 8,
-              itemBuilder: (int index) {
-                final item = _items[index];
-                return ItemTags(
-                  key: Key(index.toString()),
-                  index: index,
-                  title: item.title,
-                  active: item.active,
-                  padding: EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 12,
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 24),
+                  Text(
+                    'Selected conditions',
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18,
+                      fontFamily: AppTheme.fontFamily,
+                      height: 1.5,
+                      color: AppTheme.black,
+                    ),
                   ),
-                  activeColor: AppTheme.red,
-                  splashColor: AppTheme.purple,
-                  colorShowDuplicate: AppTheme.purple,
-                  textColor: AppTheme.red,
-                  pressEnabled: false,
-                  textActiveColor: AppTheme.white,
-                  elevation: 0,
-                  color: AppTheme.white,
-                  border: Border.all(color: AppTheme.red),
-                  borderRadius: BorderRadius.circular(12),
-                  customData: '',
-                  textStyle: TextStyle(
-                    fontSize: 14,
-                    fontFamily: AppTheme.fontFamily,
-                    fontWeight: FontWeight.normal,
-                  ),
-                  combine: ItemTagsCombine.withTextBefore,
-                  onPressed: (item) {
-                    print(item);
-                  },
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(width: 24),
-              Text(
-                'Disease Probability',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 18,
-                  fontFamily: AppTheme.fontFamily,
-                  height: 1.5,
-                  color: AppTheme.black,
-                ),
+                ],
               ),
-            ],
-          ),
-          SizedBox(height: 12),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 24),
-            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            decoration: BoxDecoration(
-              color: AppTheme.white,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: _list.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    PercentageText(data: _list[index]),
-                    index == _list.length - 1
-                        ? SizedBox(height: 0)
-                        : SizedBox(height: 8),
-                  ],
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(width: 24),
-              Text(
-                onDiagnose == true ? 'Diagnose' : 'Suggestions',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 18,
-                  fontFamily: AppTheme.fontFamily,
-                  height: 1.5,
-                  color: AppTheme.black,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 12),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 24),
-            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            decoration: BoxDecoration(
-              color: AppTheme.white,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: _diagnose.length,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    Text(
-                      _diagnose[index],
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 12,
+              SizedBox(height: 12),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Tags(
+                  key: _tagStateKey,
+                  alignment: WrapAlignment.start,
+                  itemCount: _items.length,
+                  spacing: 8,
+                  itemBuilder: (int index) {
+                    final item = _items[index];
+                    return ItemTags(
+                      key: Key(index.toString()),
+                      index: index,
+                      title: item.title,
+                      active: item.active,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 12,
+                      ),
+                      activeColor: AppTheme.red,
+                      splashColor: AppTheme.purple,
+                      colorShowDuplicate: AppTheme.purple,
+                      textColor: AppTheme.red,
+                      pressEnabled: false,
+                      textActiveColor: AppTheme.white,
+                      elevation: 0,
+                      color: AppTheme.white,
+                      border: Border.all(color: AppTheme.red),
+                      borderRadius: BorderRadius.circular(12),
+                      customData: '',
+                      textStyle: TextStyle(
+                        fontSize: 14,
                         fontFamily: AppTheme.fontFamily,
-                        height: 1.5,
-                        color: AppTheme.dark,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      combine: ItemTagsCombine.withTextBefore,
+                      onPressed: (item) {
+                        print(item);
+                      },
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 24),
+                  Text(
+                    'Disease Probability',
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18,
+                      fontFamily: AppTheme.fontFamily,
+                      height: 1.5,
+                      color: AppTheme.black,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                decoration: BoxDecoration(
+                  color: AppTheme.white,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _list.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        PercentageText(data: _list[index]),
+                        index == _list.length - 1
+                            ? SizedBox(height: 0)
+                            : SizedBox(height: 8),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 24),
+                  Text(
+                    onDiagnose == true ? 'Diagnose' : 'Suggestions',
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18,
+                      fontFamily: AppTheme.fontFamily,
+                      height: 1.5,
+                      color: AppTheme.black,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                decoration: BoxDecoration(
+                  color: AppTheme.white,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _diagnose.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Text(
+                          _diagnose[index],
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            fontSize: 12,
+                            fontFamily: AppTheme.fontFamily,
+                            height: 1.5,
+                            color: AppTheme.dark,
+                          ),
+                        ),
+                        index == _list.length - 1
+                            ? SizedBox(height: 0)
+                            : SizedBox(height: 12),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 24),
+                  Text(
+                    'Suggested Medicine',
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18,
+                      fontFamily: AppTheme.fontFamily,
+                      height: 1.5,
+                      color: AppTheme.black,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
+              Container(
+                height: 144,
+                child: ListView.builder(
+                  padding: EdgeInsets.only(left: 24, right: 8),
+                  itemCount: _drugs.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return DrugsContainer(data: _drugs[index]);
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 24),
+                  Text(
+                    'Emergency',
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18,
+                      fontFamily: AppTheme.fontFamily,
+                      height: 1.5,
+                      color: AppTheme.black,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                decoration: BoxDecoration(
+                  color: AppTheme.white,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'If you feel yourself so bad, please TAP THE SOS button immediately, this action calls an ambulance automatically to your location',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.fontFamily,
+                          fontWeight: FontWeight.w500,
+                          color: AppTheme.black,
+                          height: 1.5,
+                        ),
                       ),
                     ),
-                    index == _list.length - 1
-                        ? SizedBox(height: 0)
-                        : SizedBox(height: 12),
                   ],
-                );
-              },
-            ),
+                ),
+              ),
+              SizedBox(height: 72),
+            ],
           ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(width: 24),
-              Text(
-                'Suggested Medicine',
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 18,
-                  fontFamily: AppTheme.fontFamily,
-                  height: 1.5,
-                  color: AppTheme.black,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return WaitingScreen();
+                      },
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 56,
+                  width: (MediaQuery.of(context).size.width - 72) / 3,
+                  margin: EdgeInsets.only(left: 24, bottom: 24),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: AppTheme.red,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(5, 9),
+                        blurRadius: 15,
+                        spreadRadius: 0,
+                        color: AppTheme.gray,
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      'SOS',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        fontFamily: AppTheme.fontFamily,
+                        height: 1.5,
+                        color: AppTheme.white,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
-          ),
-          SizedBox(height: 12),
-          Container(
-            height: 112,
-            child: ListView.builder(
-              padding: EdgeInsets.only(left: 24, right: 8),
-              itemCount: _drugs.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return DrugsContainer(data: _drugs[index]);
-              },
-            ),
-          ),
+          )
         ],
       ),
     );

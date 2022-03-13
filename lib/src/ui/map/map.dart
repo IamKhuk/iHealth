@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ihealth/src/theme/app_theme.dart';
-
 import 'map_style.dart';
 
-class DoctorMapScreen extends StatefulWidget {
+class MapScreen extends StatefulWidget {
 
   @override
-  _DoctorMapScreenState createState() => _DoctorMapScreenState();
+  _MapScreenState createState() => _MapScreenState();
 }
 
-class _DoctorMapScreenState extends State<DoctorMapScreen> {
+class _MapScreenState extends State<MapScreen> {
   GoogleMapController? controller;
   BitmapDescriptor? _markerIcon;
 
@@ -20,64 +19,64 @@ class _DoctorMapScreenState extends State<DoctorMapScreen> {
     _createMarkerImageFromAsset(context);
     return Scaffold(
       backgroundColor: AppTheme.bg,
-      body: Stack(
-        children: [
-          GoogleMap(
-            myLocationButtonEnabled: false,
-            mapType: MapType.normal,
-            scrollGesturesEnabled: true,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(41.313540829447746, 69.52841010693683),
-              zoom: 16,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        brightness: Brightness.light,
+        leadingWidth: 76,
+        leading: Row(
+          children: [
+            SizedBox(width: 36),
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: AppTheme.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/icons/left.svg',
+                    color: AppTheme.black,
+                  ),
+                ),
+              ),
             ),
-            zoomControlsEnabled: false,
-            compassEnabled: false,
-            myLocationEnabled: false,
-            markers: <Marker>{_createMarker()},
-            onMapCreated: _onMapCreated,
+          ],
+        ),
+        centerTitle: true,
+        title: Text(
+          'Location',
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            fontFamily: AppTheme.fontFamily,
+            height: 1.5,
+            color: AppTheme.black,
           ),
+        ),
+      ),
+      body: Column(
+        children: [
           Container(
-            height: MediaQuery.of(context).size.height * ((94) / 812),
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 36, vertical: 12),
-            color: AppTheme.bg.withOpacity(0.3),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: AppTheme.gray,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: SvgPicture.asset('assets/icons/left.svg'),
-                        ),
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      'Doctor Location',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                        fontFamily: AppTheme.fontFamily,
-                        height: 1.5,
-                        color: AppTheme.black,
-                      ),
-                    ),
-                    Spacer(),
-                    SizedBox(width: 40),
-                  ],
-                )
-              ],
+            height: MediaQuery.of(context).size.height*0.8,
+            child: GoogleMap(
+              myLocationButtonEnabled: false,
+              mapType: MapType.normal,
+              scrollGesturesEnabled: true,
+              initialCameraPosition: CameraPosition(
+                target: LatLng(41.313540829447746, 69.52841010693683),
+                zoom: 16,
+              ),
+              zoomControlsEnabled: false,
+              compassEnabled: false,
+              myLocationEnabled: false,
+              markers: <Marker>{_createMarker()},
+              onMapCreated: _onMapCreated,
             ),
           ),
         ],
@@ -123,7 +122,7 @@ class _DoctorMapScreenState extends State<DoctorMapScreen> {
   void _onMapCreated(GoogleMapController controllerParam) {
     setState(() {
       controller = controllerParam;
-      controller!.setMapStyle(MapStyle().sliver);
+      controller!.setMapStyle(MapStyle().retro);
     });
   }
 }
