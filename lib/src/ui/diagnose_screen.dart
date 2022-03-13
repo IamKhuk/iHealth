@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tags_x/flutter_tags_x.dart';
 import 'package:ihealth/src/model/diseases_probability.dart';
+import 'package:ihealth/src/model/drugs_model.dart';
 import 'package:ihealth/src/theme/app_theme.dart';
 import 'package:ihealth/src/utils/percentages_function.dart';
+import 'package:ihealth/src/widgets/drugs_container.dart';
 import 'package:ihealth/src/widgets/percentage_rich_text.dart';
 
 class DiagnoseScreen extends StatefulWidget {
@@ -25,13 +27,18 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
   void initState() {
     _items = widget.items!;
     _list = percentages(widget.ids);
+    List<DrugsModel> drugs = [];
     for (int i = 0; i <= _list.length - 1; i++) {
       if (_list[i].percentage > 75) {
         _listBool.add(true);
       } else {
         _listBool.add(false);
       }
+      for(int j = 0; j<=_list[i].drugs.length-1;j++){
+        drugs.add(_list[i].drugs[j]);
+      }
     }
+    _drugs = drugs;
     if (_listBool.contains(true)) {
       _diagnose = _list[_listBool.indexOf(true)].diagnose;
       onDiagnose = true;
@@ -52,6 +59,7 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
   late bool onDiagnose;
   late List<String> _diagnose;
   late List<bool> _listBool = [];
+  late List<DrugsModel> _drugs;
 
   @override
   Widget build(BuildContext context) {
@@ -277,7 +285,36 @@ class _DiagnoseScreenState extends State<DiagnoseScreen> {
                 );
               },
             ),
-          )
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: 24),
+              Text(
+                'Suggested Medicine',
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                  fontFamily: AppTheme.fontFamily,
+                  height: 1.5,
+                  color: AppTheme.black,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 12),
+          Container(
+            height: 112,
+            child: ListView.builder(
+              padding: EdgeInsets.only(left: 24, right: 8),
+              itemCount: _drugs.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return DrugsContainer(data: _drugs[index]);
+              },
+            ),
+          ),
         ],
       ),
     );

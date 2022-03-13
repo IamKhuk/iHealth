@@ -116,11 +116,6 @@ List<Diseases> diseases = [
         text:
         'Ear drops can be used to treat or prevent ear infections or to help remove earwax.',
       ),
-      DrugsModel(
-        title: 'Natrullo',
-        text:
-        'Ear drops can be used to treat or prevent ear infections or to help remove earwax.',
-      ),
     ],
     recommendation: 'A pharmacist might be able to tell you: what you can do to treat earache, yourself if you can buy anything to help (for example, eardrops), if you need to see a GP.',
   ),
